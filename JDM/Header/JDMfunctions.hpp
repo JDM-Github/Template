@@ -35,6 +35,7 @@ JNAMESPACE JDM
         {
             JRETURN JSTATICC<_ReturnVal>(isValue->getValue());
         }
+        JRETURN JNULLPTR;
     }
     JEXTERN JBOOL   getIfBoolean          (JSP<JDM::Object> object                                );
     JEXTERN JLLONG  getIfInteger          (JSP<JDM::Object> object                                );

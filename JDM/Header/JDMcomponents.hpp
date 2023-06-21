@@ -35,6 +35,19 @@ JNAMESPACE JDM
         JCLASS BaseImage
         {
         JPUBLIC:
+            JENUM ImageProperties
+            {
+                SOURCE                = 0x14,
+                IMAGE_COLOR_R         = 0x15,
+                IMAGE_COLOR_G         = 0x16,
+                IMAGE_COLOR_B         = 0x17,
+                IMAGE_COLOR_A         = 0x18,
+                IMAGE_COLOR_STR       = 0x19,
+                ARC_STR               = 0x1A,
+                LINEWIDTH             = 0x1B
+            };
+
+        JPUBLIC:
             JINLINE ~BaseImage()
             {
                 SDL_DestroyTexture(JTHIS->_imageTexture);
@@ -88,16 +101,35 @@ JNAMESPACE JDM
             JINT         _lineWidth              = JNONE;
 
         JPROTECTED:
-            JCVOID _setImageRectDestination (JCONST JDM::PositionSize posSize);
-            JCVOID _setImageTexture         (JCONST JDM::Size size           );
-            JCVOID _updateImage             (JCONST JDM::PositionSize posSize);
-            JCVOID _updateImageColor        (                                );
-            JCVOID _updateImageOpacity      (                                );
-            JCVOID _renderImage             (                                );
+            JCVOID _setImageRectDestination (JCONST JDM::PositionSize posSize                      );
+            JCVOID _setImageTexture         (JCONST JDM::Size size                                 );
+            JCVOID _updateImage             (JCONST JDM::PositionSize posSize                      );
+            JCVOID _updateImageColor        (                                                      );
+            JCVOID _updateImageOpacity      (                                                      );
+            JCVOID _renderImage             (                                                      );
+            JCBOOL _setObjectProperties     (ImageProperties propertyName, JSP<JDM::Object> &object);
         };
 
         JCLASS BaseText
         {
+        JPUBLIC:
+            JENUM TextProperties
+            {
+                BOLD                  = 0x07,
+                ITALIC                = 0x08,
+                TEXT                  = 0x09,
+                TEXT_COLOR_R          = 0x0A,
+                TEXT_COLOR_G          = 0x0B,
+                TEXT_COLOR_B          = 0x0C,
+                TEXT_COLOR_A          = 0x0D,
+                TEXT_COLOR_STR        = 0x0E,
+                FONT_SIZE             = 0x0F,
+                VERTICAL_ALIGNMENT    = 0x10,
+                HORIZONTAL_ALIGNMENT  = 0x11,
+                PADDING_WIDTH         = 0x12,
+                PADDING_HEIGHT        = 0x13
+            };
+
         JPUBLIC:
             JINLINE ~BaseText()
             {
@@ -173,12 +205,13 @@ JNAMESPACE JDM
             JDOUBLE           _paddingHeight         = JNONE;
 
         JPROTECTED:
-            JCVOID _setTextRectDestination (JCONST JDM::PositionSize posSize);
-            JCVOID _updateText             (JCONST JDM::PositionSize posSize);
-            JCVOID _setTextTexture         (                                );
-            JCVOID _updateTextColor        (                                );
-            JCVOID _updateTextOpacity      (                                );
-            JCVOID _renderText             (                                );
+            JCVOID _setTextRectDestination (JCONST JDM::PositionSize posSize                     );
+            JCVOID _updateText             (JCONST JDM::PositionSize posSize                     );
+            JCVOID _setTextTexture         (                                                     );
+            JCVOID _updateTextColor        (                                                     );
+            JCVOID _updateTextOpacity      (                                                     );
+            JCVOID _renderText             (                                                     );
+            JCBOOL _setObjectProperties    (TextProperties propertyName, JSP<JDM::Object> &object);
         };
 
         JCLASS Components
@@ -186,13 +219,13 @@ JNAMESPACE JDM
         JPUBLIC:
             JENUM Properties
             {
-                X,
-                Y,
-                WIDTH,
-                HEIGHT,
-                DISABLED,
-                PICK_ON_BOUNDS,
-                WILL_RENDER
+                X                = 0x00,
+                Y                = 0x01,
+                WIDTH            = 0x02,
+                HEIGHT           = 0x03,
+                DISABLED         = 0x04,
+                PICK_ON_BOUNDS   = 0x05,
+                WILL_RENDER      = 0x06
             };
 
         JPUBLIC:
@@ -262,8 +295,9 @@ JNAMESPACE JDM
             );
 
         JPROTECTED:
-            JCVOID                  setMouseClick (JCBOOL set);
-            JINLINE JVIRTUAL JCVOID update        (          ) {}
+            JCVOID                  setMouseClick       (JCBOOL set                                       );
+            JCBOOL                  setObjectProperties (Properties propertyName, JSP<JDM::Object> &object);
+            JINLINE JVIRTUAL JCVOID update              (                                                 ) {}
 
         JPRIVATE:
             JFUNCCALL                                      _updateFunction      = [](                           ) {}; 
@@ -284,26 +318,26 @@ JNAMESPACE JDM
         JPUBLIC:
             JENUM Properties
             {
-                X,
-                Y,
-                WIDTH,
-                HEIGHT,
-                DISABLED,
-                PICK_ON_BOUNDS,
-                WILL_RENDER,
-                BOLD,
-                ITALIC,
-                TEXT,
-                TEXT_COLOR_R,
-                TEXT_COLOR_G,
-                TEXT_COLOR_B,
-                TEXT_COLOR_A,
-                TEXT_COLOR_STR,
-                FONT_SIZE,
-                VERTICAL_ALIGNMENT,
-                HORIZONTAL_ALIGNMENT,
-                PADDING_WIDTH,
-                PADDING_HEIGHT
+                X                     = 0x00,
+                Y                     = 0x01,
+                WIDTH                 = 0x02,
+                HEIGHT                = 0x03,
+                DISABLED              = 0x04,
+                PICK_ON_BOUNDS        = 0x05,
+                WILL_RENDER           = 0x06,
+                BOLD                  = 0x07,
+                ITALIC                = 0x08,
+                TEXT                  = 0x09,
+                TEXT_COLOR_R          = 0x0A,
+                TEXT_COLOR_G          = 0x0B,
+                TEXT_COLOR_B          = 0x0C,
+                TEXT_COLOR_A          = 0x0D,
+                TEXT_COLOR_STR        = 0x0E,
+                FONT_SIZE             = 0x0F,
+                VERTICAL_ALIGNMENT    = 0x10,
+                HORIZONTAL_ALIGNMENT  = 0x11,
+                PADDING_WIDTH         = 0x12,
+                PADDING_HEIGHT        = 0x13
             };
 
         JPUBLIC:
@@ -329,8 +363,7 @@ JNAMESPACE JDM
                 JCONST JDM::Font::Valign vAlign   = JDM::Font::VCENTER
             );
             Text(
-                JMAP<Properties, JSP<JDM::Object>> mapComponent
-            );
+                JMAP<Properties, JSP<JDM::Object>> mapComponent);
         };
 
         JCLASS Image : JPUBLIC Components, JPUBLIC BaseGradient, JPUBLIC BaseImage
@@ -338,21 +371,21 @@ JNAMESPACE JDM
         JPUBLIC:
             JENUM Properties
             {
-                X,
-                Y,
-                WIDTH,
-                HEIGHT,
-                DISABLED,
-                PICK_ON_BOUNDS,
-                WILL_RENDER,
-                SOURCE,
-                IMAGE_COLOR_R,
-                IMAGE_COLOR_G,
-                IMAGE_COLOR_B,
-                IMAGE_COLOR_A,
-                IMAGE_COLOR_STR,
-                ARC_STR,
-                LINEWIDTH
+                X                     = 0x00,
+                Y                     = 0x01,
+                WIDTH                 = 0x02,
+                HEIGHT                = 0x03,
+                DISABLED              = 0x04,
+                PICK_ON_BOUNDS        = 0x05,
+                WILL_RENDER           = 0x06,
+                SOURCE                = 0x14,
+                IMAGE_COLOR_R         = 0x15,
+                IMAGE_COLOR_G         = 0x16,
+                IMAGE_COLOR_B         = 0x17,
+                IMAGE_COLOR_A         = 0x18,
+                IMAGE_COLOR_STR       = 0x19,
+                ARC_STR               = 0x1A,
+                LINEWIDTH             = 0x1B
             };
 
         JPUBLIC:
@@ -384,6 +417,39 @@ JNAMESPACE JDM
         JCLASS Label : JPUBLIC Components, JPUBLIC BaseImage, JPUBLIC BaseText, JPUBLIC BaseGradient
         {
         JPUBLIC:
+            JENUM Properties
+            {
+                X                     = 0x00,
+                Y                     = 0x01,
+                WIDTH                 = 0x02,
+                HEIGHT                = 0x03,
+                DISABLED              = 0x04,
+                PICK_ON_BOUNDS        = 0x05,
+                WILL_RENDER           = 0x06,
+                BOLD                  = 0x07,
+                ITALIC                = 0x08,
+                TEXT                  = 0x09,
+                TEXT_COLOR_R          = 0x0A,
+                TEXT_COLOR_G          = 0x0B,
+                TEXT_COLOR_B          = 0x0C,
+                TEXT_COLOR_A          = 0x0D,
+                TEXT_COLOR_STR        = 0x0E,
+                FONT_SIZE             = 0x0F,
+                VERTICAL_ALIGNMENT    = 0x10,
+                HORIZONTAL_ALIGNMENT  = 0x11,
+                PADDING_WIDTH         = 0x12,
+                PADDING_HEIGHT        = 0x13,
+                SOURCE                = 0x14,
+                IMAGE_COLOR_R         = 0x15,
+                IMAGE_COLOR_G         = 0x16,
+                IMAGE_COLOR_B         = 0x17,
+                IMAGE_COLOR_A         = 0x18,
+                IMAGE_COLOR_STR       = 0x19,
+                ARC_STR               = 0x1A,
+                LINEWIDTH             = 0x1B
+            };
+
+        JPUBLIC:
             JUINT8        *getPointerRText  () JOVERRIDE;
             JUINT8        *getPointerGText  () JOVERRIDE;
             JUINT8        *getPointerBText  () JOVERRIDE;
@@ -411,6 +477,9 @@ JNAMESPACE JDM
                 JCINT                    fontSize   = 0x0f,
                 JCONST JDM::Font::Halign hAlign     = JDM::Font::HCENTER,
                 JCONST JDM::Font::Valign vAlign     = JDM::Font::VCENTER
+            );
+            Label(
+                JMAP<Properties, JSP<JDM::Object>> mapComponent
             );
         };
 

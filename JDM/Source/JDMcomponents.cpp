@@ -421,6 +421,44 @@ JCVOID JDM::Comp::BaseImage::_renderImage()
     SDL_RenderCopyF(JDM::renderer, JTHIS->_imageTexture, &JTHIS->_imageSource, &JTHIS->_imageDestination);
 }
 
+JCBOOL JDM::Comp::BaseImage::_setObjectProperties(ImageProperties propertyName, JSP<JDM::Object> &object)
+{
+    JSWITCH (propertyName)
+    {
+        JCASE ImageProperties::SOURCE:
+            JTHIS->setImageSource(JDM::getIfString(object));
+            JRETURN JTRUE;
+
+        JCASE ImageProperties::IMAGE_COLOR_R:
+            JTHIS->setImageColorR(JDM::getUint8Limit(object));
+            JRETURN JTRUE;
+
+        JCASE ImageProperties::IMAGE_COLOR_G:
+            JTHIS->setImageColorG(JDM::getUint8Limit(object));
+            JRETURN JTRUE;
+
+        JCASE ImageProperties::IMAGE_COLOR_B:
+            JTHIS->setImageColorB(JDM::getUint8Limit(object));
+            JRETURN JTRUE;
+
+        JCASE ImageProperties::IMAGE_COLOR_A:
+            JTHIS->setImageOpacity(JDM::getUint8Limit(object));
+            JRETURN JTRUE;
+
+        JCASE ImageProperties::IMAGE_COLOR_STR:
+            JTHIS->setImageAndOpacityColor(JDM::getColorFromHexA(JDM::getIfString(object)));
+            JRETURN JTRUE;
+
+        JCASE ImageProperties::ARC_STR:
+            JTHIS->setImageFourArc(JSTATICC<JDM::FourArc>(JDM::getColorFromHex(JDM::getIfString(object))));
+            JRETURN JTRUE;
+
+        JCASE ImageProperties::LINEWIDTH:
+            JTHIS->setImageLineWidth(JDM::getIfInteger(object));
+            JRETURN JTRUE;
+    }
+    JRETURN JFALSE;
+}
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -798,6 +836,60 @@ JCVOID JDM::Comp::BaseText::_renderText()
     SDL_RenderCopyF(JDM::renderer, JTHIS->_textTexture, &JTHIS->_textSource, &JTHIS->_textDestination);
 }
 
+JCBOOL JDM::Comp::BaseText::_setObjectProperties(TextProperties propertyName, JSP<JDM::Object> &object)
+{
+    JSWITCH (propertyName)
+    {
+        JCASE TextProperties::BOLD:
+            JTHIS->setBold(JDM::getIfBoolean(object));
+            JRETURN JTRUE;
+
+        JCASE TextProperties::ITALIC:
+            JTHIS->setItalic(JDM::getIfBoolean(object));
+            JRETURN JTRUE;
+
+        JCASE TextProperties::TEXT:
+            JTHIS->setTextMessage(JDM::getIfString(object));
+            JRETURN JTRUE;
+
+        JCASE TextProperties::TEXT_COLOR_R:
+            JTHIS->setTextColorR(JDM::getUint8Limit(object));
+            JRETURN JTRUE;
+
+        JCASE TextProperties::TEXT_COLOR_G:
+            JTHIS->setTextColorG(JDM::getUint8Limit(object));
+            JRETURN JTRUE;
+
+        JCASE TextProperties::TEXT_COLOR_B:
+            JTHIS->setTextColorB(JDM::getUint8Limit(object));
+            JRETURN JTRUE;
+
+        JCASE TextProperties::TEXT_COLOR_A:
+            JTHIS->setTextOpacity(JDM::getUint8Limit(object));
+            JRETURN JTRUE;
+
+        JCASE TextProperties::TEXT_COLOR_STR:
+            JTHIS->setTextAndOpacityColor(JDM::getColorFromHexA(JDM::getIfString(object)));
+            JRETURN JTRUE;
+
+        JCASE TextProperties::VERTICAL_ALIGNMENT:
+            JTHIS->setValign(JSTATICC<JDM::Font::Valign>(JDM::getNumberLimit(object, 0, 2)));
+            JRETURN JTRUE;
+
+        JCASE TextProperties::HORIZONTAL_ALIGNMENT:
+            JTHIS->setHalign(JSTATICC<JDM::Font::Halign>(JDM::getNumberLimit(object, 0, 2)));
+            JRETURN JTRUE;
+
+        JCASE TextProperties::PADDING_WIDTH:
+            JTHIS->setPaddingWidth(JDM::getObjectArithmetic(object));
+            JRETURN JTRUE;
+
+        JCASE TextProperties::PADDING_HEIGHT:
+            JTHIS->setPaddingHeight(JDM::getObjectArithmetic(object));
+            JRETURN JTRUE;
+    }
+    JRETURN JFALSE;
+}
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -834,38 +926,42 @@ JDM::Comp::Components::Components(
 )
 {
     JFOR (JAUTO [propertyName, object]: mapComponent)
+        JTHIS->setObjectProperties(propertyName, object);
+}
+
+JCBOOL JDM::Comp::Components::setObjectProperties(Properties propertyName, JSP<JDM::Object> &object)
+{
+    JSWITCH (propertyName)
     {
-        JSWITCH (propertyName)
-        {
-            JCASE Properties::X:
-                JTHIS->setX(JDM::getObjectArithmetic(object));
-                JBREAK;
-    
-            JCASE Properties::Y:
-                JTHIS->setY(JDM::getObjectArithmetic(object));
-                JBREAK;
-            
-            JCASE Properties::WIDTH:
-                JTHIS->setWidth(JDM::getObjectArithmetic(object));
-                JBREAK;
-            
-            JCASE Properties::HEIGHT:
-                JTHIS->setHeight(JDM::getObjectArithmetic(object));
-                JBREAK;
+        JCASE Properties::X:
+            JTHIS->setX(JDM::getObjectArithmetic(object));
+            JRETURN JTRUE;
 
-            JCASE Properties::DISABLED:
-                JTHIS->setDisabled(JDM::getIfBoolean(object));
-                JBREAK;
+        JCASE Properties::Y:
+            JTHIS->setY(JDM::getObjectArithmetic(object));
+            JRETURN JTRUE;
 
-            JCASE Properties::PICK_ON_BOUNDS:
-                JTHIS->setPickOnBounds(JDM::getIfBoolean(object));
-                JBREAK;
+        JCASE Properties::WIDTH:
+            JTHIS->setWidth(JDM::getObjectArithmetic(object));
+            JRETURN JTRUE;
 
-            JCASE Properties::WILL_RENDER:
-                JTHIS->setRendering(JDM::getIfBoolean(object));
-                JBREAK;
-        }
+        JCASE Properties::HEIGHT:
+            JTHIS->setHeight(JDM::getObjectArithmetic(object));
+            JRETURN JTRUE;
+
+        JCASE Properties::DISABLED:
+            JTHIS->setDisabled(JDM::getIfBoolean(object));
+            JRETURN JTRUE;
+
+        JCASE Properties::PICK_ON_BOUNDS:
+            JTHIS->setPickOnBounds(JDM::getIfBoolean(object));
+            JRETURN JTRUE;
+
+        JCASE Properties::WILL_RENDER:
+            JTHIS->setRendering(JDM::getIfBoolean(object));
+            JRETURN JTRUE;
     }
+    JRETURN JFALSE;
 }
 
 JCBOOL JDM::Comp::Components::contains(JCDOUBLE xPos, JCDOUBLE yPos) JCONST
@@ -1189,84 +1285,8 @@ JDM::Comp::Text::Text(
 {
     JFOR (JAUTO [propertyName, object]: mapComponent)
     {
-        JSWITCH (propertyName)
-        {
-            JCASE Properties::X:
-                JTHIS->setX(JDM::getObjectArithmetic(object));
-                JBREAK;
-    
-            JCASE Properties::Y:
-                JTHIS->setY(JDM::getObjectArithmetic(object));
-                JBREAK;
-            
-            JCASE Properties::WIDTH:
-                JTHIS->setWidth(JDM::getObjectArithmetic(object));
-                JBREAK;
-            
-            JCASE Properties::HEIGHT:
-                JTHIS->setHeight(JDM::getObjectArithmetic(object));
-                JBREAK;
-
-            JCASE Properties::DISABLED:
-                JTHIS->setDisabled(JDM::getIfBoolean(object));
-                JBREAK;
-
-            JCASE Properties::PICK_ON_BOUNDS:
-                JTHIS->setPickOnBounds(JDM::getIfBoolean(object));
-                JBREAK;
-
-            JCASE Properties::WILL_RENDER:
-                JTHIS->setRendering(JDM::getIfBoolean(object));
-                JBREAK;
-            
-            JCASE Properties::BOLD:
-                JTHIS->setBold(JDM::getIfBoolean(object));
-                JBREAK;
-            
-            JCASE Properties::ITALIC:
-                JTHIS->setItalic(JDM::getIfBoolean(object));
-                JBREAK;
-
-            JCASE Properties::TEXT:
-                JTHIS->setTextMessage(JDM::getIfString(object));
-                JBREAK;
-
-            JCASE Properties::TEXT_COLOR_R:
-                JTHIS->setTextColorR(JDM::getUint8Limit(object));
-                JBREAK;
-
-            JCASE Properties::TEXT_COLOR_G:
-                JTHIS->setTextColorG(JDM::getUint8Limit(object));
-                JBREAK;
-
-            JCASE Properties::TEXT_COLOR_B:
-                JTHIS->setTextColorB(JDM::getUint8Limit(object));
-                JBREAK;
-
-            JCASE Properties::TEXT_COLOR_A:
-                JTHIS->setTextOpacity(JDM::getUint8Limit(object));
-                JBREAK;
-
-            JCASE Properties::TEXT_COLOR_STR:
-                JTHIS->setTextAndOpacityColor(JDM::getColorFromHexA(JDM::getIfString(object)));
-                JBREAK;
-
-            JCASE Properties::VERTICAL_ALIGNMENT:
-                JTHIS->setValign(JSTATICC<JDM::Font::Valign>(JDM::getNumberLimit(object, 0, 2)));
-                JBREAK;
-
-            JCASE Properties::HORIZONTAL_ALIGNMENT:
-                JTHIS->setHalign(JSTATICC<JDM::Font::Halign>(JDM::getNumberLimit(object, 0, 2)));
-                JBREAK;
-
-            JCASE Properties::PADDING_WIDTH:
-                JTHIS->setPaddingWidth(JDM::getObjectArithmetic(object));
-                JBREAK;
-
-            JCASE Properties::PADDING_HEIGHT:
-                JTHIS->setPaddingHeight(JDM::getObjectArithmetic(object));
-                JBREAK;
-        }
+        JIF(!JDM::Comp::Components::setObjectProperties(JSTATICC<JDM::Comp::Components::Properties>(propertyName), object))
+            JDM::Comp::BaseText::_setObjectProperties(JSTATICC<JDM::Comp::BaseText::TextProperties>(propertyName), object);
     }
     JTHIS->_setTextTexture();
 }
@@ -1354,68 +1374,8 @@ JDM::Comp::Image::Image(
 {
     JFOR (JAUTO [propertyName, object]: mapComponent)
     {
-        JSWITCH (propertyName)
-        {
-            JCASE Properties::X:
-                JTHIS->setX(JDM::getObjectArithmetic(object));
-                JBREAK;
-    
-            JCASE Properties::Y:
-                JTHIS->setY(JDM::getObjectArithmetic(object));
-                JBREAK;
-            
-            JCASE Properties::WIDTH:
-                JTHIS->setWidth(JDM::getObjectArithmetic(object));
-                JBREAK;
-            
-            JCASE Properties::HEIGHT:
-                JTHIS->setHeight(JDM::getObjectArithmetic(object));
-                JBREAK;
-
-            JCASE Properties::DISABLED:
-                JTHIS->setDisabled(JDM::getIfBoolean(object));
-                JBREAK;
-
-            JCASE Properties::PICK_ON_BOUNDS:
-                JTHIS->setPickOnBounds(JDM::getIfBoolean(object));
-                JBREAK;
-
-            JCASE Properties::WILL_RENDER:
-                JTHIS->setRendering(JDM::getIfBoolean(object));
-                JBREAK;
-
-            JCASE Properties::SOURCE:
-                JTHIS->setImageSource(JDM::getIfString(object));
-                JBREAK;
-
-            JCASE Properties::IMAGE_COLOR_R:
-                JTHIS->setImageColorR(JDM::getUint8Limit(object));
-                JBREAK;
-
-            JCASE Properties::IMAGE_COLOR_G:
-                JTHIS->setImageColorG(JDM::getUint8Limit(object));
-                JBREAK;
-
-            JCASE Properties::IMAGE_COLOR_B:
-                JTHIS->setImageColorB(JDM::getUint8Limit(object));
-                JBREAK;
-
-            JCASE Properties::IMAGE_COLOR_A:
-                JTHIS->setImageOpacity(JDM::getUint8Limit(object));
-                JBREAK;
-
-            JCASE Properties::IMAGE_COLOR_STR:
-                JTHIS->setImageAndOpacityColor(JDM::getColorFromHexA(JDM::getIfString(object)));
-                JBREAK;
-
-            JCASE Properties::ARC_STR:
-                JTHIS->setImageFourArc(JSTATICC<JDM::FourArc>(JDM::getColorFromHex(JDM::getIfString(object))));
-                JBREAK;
-
-            JCASE Properties::LINEWIDTH:
-                JTHIS->setImageLineWidth(JDM::getIfInteger(object));
-                JBREAK;
-        }
+        JIF(!JDM::Comp::Components::setObjectProperties(JSTATICC<JDM::Comp::Components::Properties>(propertyName), object))
+            JDM::Comp::BaseImage::_setObjectProperties(JSTATICC<JDM::Comp::BaseImage::ImageProperties>(propertyName), object);
     }
     JTHIS->setImageSource  (JTHIS->getImageSource());
     JTHIS->_setImageTexture(JTHIS->getSize());
@@ -1508,6 +1468,21 @@ JDM::Comp::Label::Label(
     JTHIS->_valign     = vAlign;
     JTHIS->_setTextTexture  ();
     JTHIS->_setImageTexture (JTHIS->getSize());
+}
+
+JDM::Comp::Label::Label(
+    JMAP<Properties, JSP<JDM::Object>> mapComponent
+)
+{
+    JFOR (JAUTO [propertyName, object]: mapComponent)
+    {
+        JIF(!JDM::Comp::Components::setObjectProperties(JSTATICC<JDM::Comp::Components::Properties>(propertyName), object))
+            JIF(!JDM::Comp::BaseImage::_setObjectProperties(JSTATICC<JDM::Comp::BaseImage::ImageProperties>(propertyName), object))
+                JDM::Comp::BaseText::_setObjectProperties(JSTATICC<JDM::Comp::BaseText::TextProperties>(propertyName), object);
+    }
+    JTHIS->_setTextTexture();
+    JTHIS->setImageSource  (JTHIS->getImageSource());
+    JTHIS->_setImageTexture(JTHIS->getSize());
 }
 
 JUINT8 *JDM::Comp::Label::getPointerRText()
