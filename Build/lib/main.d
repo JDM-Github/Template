@@ -59,14 +59,19 @@ Build/lib/main.o: main.cpp JDM/JDM.hpp JDM/Header/JDMwindow.hpp \
  JDM/Header/JDMobjects/JDMDouble.hpp JDM/Header/JDMobjects/JDMArray.hpp \
  JDM/Header/JDMobjects/JDMBoolean.hpp JDM/Header/JDMobjects/JDMString.hpp \
  JDM/Header/JDManimation.hpp JDM/Header/JDMenum.hpp \
- JDM/Header/JDMcomponents.hpp JDM/Header/JDMfonts.hpp \
- JDM/Header/logger.hpp JDM/Header/JDMbaseComponents/JDMbaseGradient.hpp \
+ JDM/Header/JDMcomponents/JDMcomponent.hpp \
+ JDM/Header/JDMcomponents/JDMfocusedText.hpp \
+ JDM/Header/JDMcomponents/JDMlabel.hpp \
+ JDM/Header/JDMbaseComponents/JDMbaseGradient.hpp \
  JDM/Header/JDMbaseComponents/JDMbaseImage.hpp \
- JDM/Header/JDMbaseComponents/JDMbaseText.hpp \
- JDM/Header/JDMcomponents/JDMcomponent.hpp JDM/Header/JDMkeycodes.hpp \
+ JDM/Header/JDMbaseComponents/JDMbaseText.hpp JDM/Header/JDMfonts.hpp \
+ JDM/Header/JDMkeycodes.hpp JDM/Header/logger.hpp \
  JDM/Header/JDMlayout.hpp JDM/Header/JDMcanvas.hpp \
  JDM/Header/JDMcolor.hpp JDM/Header/JDMsetter.hpp \
- JDM/Header/cacheManager.hpp HeaderFiles/Template.hpp
+ JDM/Header/cacheManager.hpp JDM/Header/JDMcomponents/JDMbutton.hpp \
+ JDM/Header/JDMcomponents/JDMimage.hpp \
+ JDM/Header/JDMcomponents/JDMtext.hpp \
+ JDM/Header/JDMcomponents/JDMtextInput.hpp HeaderFiles/Template.hpp
 JDM/JDM.hpp:
 JDM/Header/JDMwindow.hpp:
 JDM/Header/JDMinclude.hpp:
@@ -137,17 +142,22 @@ JDM/Header/JDMobjects/JDMBoolean.hpp:
 JDM/Header/JDMobjects/JDMString.hpp:
 JDM/Header/JDManimation.hpp:
 JDM/Header/JDMenum.hpp:
-JDM/Header/JDMcomponents.hpp:
-JDM/Header/JDMfonts.hpp:
-JDM/Header/logger.hpp:
+JDM/Header/JDMcomponents/JDMcomponent.hpp:
+JDM/Header/JDMcomponents/JDMfocusedText.hpp:
+JDM/Header/JDMcomponents/JDMlabel.hpp:
 JDM/Header/JDMbaseComponents/JDMbaseGradient.hpp:
 JDM/Header/JDMbaseComponents/JDMbaseImage.hpp:
 JDM/Header/JDMbaseComponents/JDMbaseText.hpp:
-JDM/Header/JDMcomponents/JDMcomponent.hpp:
+JDM/Header/JDMfonts.hpp:
 JDM/Header/JDMkeycodes.hpp:
+JDM/Header/logger.hpp:
 JDM/Header/JDMlayout.hpp:
 JDM/Header/JDMcanvas.hpp:
 JDM/Header/JDMcolor.hpp:
 JDM/Header/JDMsetter.hpp:
 JDM/Header/cacheManager.hpp:
+JDM/Header/JDMcomponents/JDMbutton.hpp:
+JDM/Header/JDMcomponents/JDMimage.hpp:
+JDM/Header/JDMcomponents/JDMtext.hpp:
+JDM/Header/JDMcomponents/JDMtextInput.hpp:
 HeaderFiles/Template.hpp:

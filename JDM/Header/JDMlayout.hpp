@@ -2,7 +2,7 @@
 #ifndef JDM_LAYOUT_HPP
 #define JDM_LAYOUT_HPP
 #include "defines.hpp"
-#include "JDMcomponents.hpp"
+#include "JDMcomponents/JDMcomponent.hpp"
 
 
 JNAMESPACE JDM

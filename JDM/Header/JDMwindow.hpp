@@ -6,7 +6,8 @@
 #include "JDMfunctions.hpp"
 #include "JDManimation.hpp"
 #include "JDMstructs.hpp"
-#include "JDMcomponents.hpp"
+#include "JDMcomponents/JDMcomponent.hpp"
+#include "JDMcomponents/JDMfocusedText.hpp"
 #include "JDMkeycodes.hpp"
 #include "logger.hpp"
 

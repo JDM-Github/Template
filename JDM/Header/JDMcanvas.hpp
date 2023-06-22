@@ -2,7 +2,7 @@
 #ifndef JDM_CANVAS_HPP
 #define JDM_CANVAS_HPP
 #include "defines.hpp"
-#include "JDMcomponents.hpp"
+#include "JDMcomponents/JDMcomponent.hpp"
 
 JNAMESPACE JDM
 {

@@ -9,4 +9,11 @@
 #include "Header/JDMsetter.hpp"
 #include "Header/cacheManager.hpp"
 
+#include "Header/JDMcomponents/JDMcomponent.hpp"
+#include "Header/JDMcomponents/JDMbutton.hpp"
+#include "Header/JDMcomponents/JDMimage.hpp"
+#include "Header/JDMcomponents/JDMlabel.hpp"
+#include "Header/JDMcomponents/JDMtext.hpp"
+#include "Header/JDMcomponents/JDMtextInput.hpp"
+
 #endif
