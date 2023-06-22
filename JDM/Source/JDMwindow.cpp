@@ -172,6 +172,7 @@ JCVOID JDM::Window::_winUpdate()
             (*comp)->updateComp();
 }
 
+
 JCVOID JDM::Window::_winRender()
 {
     SDL_SetRenderDrawColor(JDM::renderer, JTHIS->_winColor.r, JTHIS->_winColor.g, JTHIS->_winColor.b, 0xff);

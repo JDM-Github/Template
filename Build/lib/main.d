@@ -60,7 +60,10 @@ Build/lib/main.o: main.cpp JDM/JDM.hpp JDM/Header/JDMwindow.hpp \
  JDM/Header/JDMobjects/JDMBoolean.hpp JDM/Header/JDMobjects/JDMString.hpp \
  JDM/Header/JDManimation.hpp JDM/Header/JDMenum.hpp \
  JDM/Header/JDMcomponents.hpp JDM/Header/JDMfonts.hpp \
- JDM/Header/logger.hpp JDM/Header/JDMkeycodes.hpp \
+ JDM/Header/logger.hpp JDM/Header/JDMbaseComponents/JDMbaseGradient.hpp \
+ JDM/Header/JDMbaseComponents/JDMbaseImage.hpp \
+ JDM/Header/JDMbaseComponents/JDMbaseText.hpp \
+ JDM/Header/JDMcomponents/JDMcomponent.hpp JDM/Header/JDMkeycodes.hpp \
  JDM/Header/JDMlayout.hpp JDM/Header/JDMcanvas.hpp \
  JDM/Header/JDMcolor.hpp JDM/Header/JDMsetter.hpp \
  JDM/Header/cacheManager.hpp HeaderFiles/Template.hpp
@@ -137,6 +140,10 @@ JDM/Header/JDMenum.hpp:
 JDM/Header/JDMcomponents.hpp:
 JDM/Header/JDMfonts.hpp:
 JDM/Header/logger.hpp:
+JDM/Header/JDMbaseComponents/JDMbaseGradient.hpp:
+JDM/Header/JDMbaseComponents/JDMbaseImage.hpp:
+JDM/Header/JDMbaseComponents/JDMbaseText.hpp:
+JDM/Header/JDMcomponents/JDMcomponent.hpp:
 JDM/Header/JDMkeycodes.hpp:
 JDM/Header/JDMlayout.hpp:
 JDM/Header/JDMcanvas.hpp:
