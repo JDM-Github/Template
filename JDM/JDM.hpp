@@ -3,11 +3,13 @@
 #define JDM_HPP
 
 #include "Header/JDMwindow.hpp"
-#include "Header/JDMlayout.hpp"
 #include "Header/JDMcanvas.hpp"
 #include "Header/JDMcolor.hpp"
 #include "Header/JDMsetter.hpp"
 #include "Header/cacheManager.hpp"
+
+#include "Header/JDMlayoutComponents/JDMgridLayout.hpp"
+#include "Header/JDMlayoutComponents/JDMfloatLayout.hpp"
 
 #include "Header/JDMcomponents/JDMcomponent.hpp"
 #include "Header/JDMcomponents/JDMbutton.hpp"

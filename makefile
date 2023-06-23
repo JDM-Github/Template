@@ -13,7 +13,7 @@ SDL_INCLUDE    = -I "C:/SDL/Template/SDL/include"
 SDL_LIBRARY    = -L "C:/SDL/Template/SDL/lib"
 
 JDM_INCLUDE    = -I "C:/SDL/Template/JDM"
-JDM_LIB        = C:/SDL/Template/JDM/Source C:/SDL/Template/JDM/Source/JDMbaseComponents C:/SDL/Template/JDM/Source/JDMcomponents
+JDM_LIB        = C:/SDL/Template/JDM/Source C:/SDL/Template/JDM/Source/JDMbaseComponents C:/SDL/Template/JDM/Source/JDMcomponents C:/SDL/Template/JDM/Source/JDMlayoutComponents
 JDM_O_FOLDER   = C:/SDL/Template/JDM/DLL/lib/O
 JDM_SOURCE     = $(foreach D, $(JDM_LIB), $(wildcard $(D)/*.cpp))
 JDM_OBJECTS    = $(patsubst %.cpp, $(JDM_O_FOLDER)/%.o, $(notdir $(JDM_SOURCE)))
@@ -50,6 +50,10 @@ $(JDM_O_FOLDER)/%.o: C:/SDL/Template/JDM/Source/JDMbaseComponents/%.cpp
 	@$(CXX) $(SDL_INCLUDE) $(ALL_INCLUDE) $(JDM_INCLUDE) $(SDL_LIBRARY) -c $< -o $@
 
 $(JDM_O_FOLDER)/%.o: C:/SDL/Template/JDM/Source/JDMcomponents/%.cpp
+	@echo Creating $@ $< ...
+	@$(CXX) $(SDL_INCLUDE) $(ALL_INCLUDE) $(JDM_INCLUDE) $(SDL_LIBRARY) -c $< -o $@
+
+$(JDM_O_FOLDER)/%.o: C:/SDL/Template/JDM/Source/JDMlayoutComponents/%.cpp
 	@echo Creating $@ $< ...
 	@$(CXX) $(SDL_INCLUDE) $(ALL_INCLUDE) $(JDM_INCLUDE) $(SDL_LIBRARY) -c $< -o $@
 

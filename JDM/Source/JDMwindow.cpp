@@ -1,6 +1,6 @@
 #include "JDM/Header/JDMwindow.hpp"
 #include "JDM/Header/cacheManager.hpp"
-#include "JDM/Header/JDMlayout.hpp"
+#include "JDM/Header/JDMbaseComponents/JDMbaseLayout.hpp"
 
 
 JLIST<JPAIR<JPAIR<JSP<JDM::Comp::Components>, JUINT>, JCHAR>> JDM::Window::_allHandlingComponents = {};
@@ -100,7 +100,6 @@ JCBOOL JDM::Window::_createRenderer()
     JRETURN (JDM::renderer == JNULLPTR);
 }
 
-
 JCVOID JDM::Window::run()
 {
     JDM::Logger(" > [ INFO ]: Initializing all objects...");
@@ -109,7 +108,7 @@ JCVOID JDM::Window::run()
 
     JFOR (JCONST JAUTO &comp : JTHIS->_allComponents)
     {
-        JAUTO layout = JDYNAMICC<JDM::Layout::BaseLayout*>(comp.get());
+        JAUTO layout = JDYNAMICC<JDM::Base::BaseLayout*>(comp.get());
         JIF (layout != JNULLPTR)
             layout->handleChildren();
     }

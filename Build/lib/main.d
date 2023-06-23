@@ -66,9 +66,12 @@ Build/lib/main.o: main.cpp JDM/JDM.hpp JDM/Header/JDMwindow.hpp \
  JDM/Header/JDMbaseComponents/JDMbaseImage.hpp \
  JDM/Header/JDMbaseComponents/JDMbaseText.hpp JDM/Header/JDMfonts.hpp \
  JDM/Header/JDMkeycodes.hpp JDM/Header/logger.hpp \
- JDM/Header/JDMlayout.hpp JDM/Header/JDMcanvas.hpp \
- JDM/Header/JDMcolor.hpp JDM/Header/JDMsetter.hpp \
- JDM/Header/cacheManager.hpp JDM/Header/JDMcomponents/JDMbutton.hpp \
+ JDM/Header/JDMcanvas.hpp JDM/Header/JDMcolor.hpp \
+ JDM/Header/JDMsetter.hpp JDM/Header/cacheManager.hpp \
+ JDM/Header/JDMlayoutComponents/JDMgridLayout.hpp \
+ JDM/Header/JDMbaseComponents/JDMbaseLayout.hpp \
+ JDM/Header/JDMlayoutComponents/JDMfloatLayout.hpp \
+ JDM/Header/JDMcomponents/JDMbutton.hpp \
  JDM/Header/JDMcomponents/JDMimage.hpp \
  JDM/Header/JDMcomponents/JDMtext.hpp \
  JDM/Header/JDMcomponents/JDMtextInput.hpp HeaderFiles/Template.hpp
@@ -151,11 +154,13 @@ JDM/Header/JDMbaseComponents/JDMbaseText.hpp:
 JDM/Header/JDMfonts.hpp:
 JDM/Header/JDMkeycodes.hpp:
 JDM/Header/logger.hpp:
-JDM/Header/JDMlayout.hpp:
 JDM/Header/JDMcanvas.hpp:
 JDM/Header/JDMcolor.hpp:
 JDM/Header/JDMsetter.hpp:
 JDM/Header/cacheManager.hpp:
+JDM/Header/JDMlayoutComponents/JDMgridLayout.hpp:
+JDM/Header/JDMbaseComponents/JDMbaseLayout.hpp:
+JDM/Header/JDMlayoutComponents/JDMfloatLayout.hpp:
 JDM/Header/JDMcomponents/JDMbutton.hpp:
 JDM/Header/JDMcomponents/JDMimage.hpp:
 JDM/Header/JDMcomponents/JDMtext.hpp:

@@ -15,6 +15,7 @@ private:
     const void initAllObjects() { Game::initAllObjects(); }
     const void update() { Game::update(); }
 };
+
 int main(int argc, char** argv) {
     std::make_shared<GameWindow>()->run();
     return 0;
