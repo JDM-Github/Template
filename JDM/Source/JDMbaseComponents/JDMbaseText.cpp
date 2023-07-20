@@ -59,7 +59,7 @@ JCVOID JDM::Base::BaseText::setTextOpacity(JCONST JUINT8 opacity) {
     JIF (JTHIS->_textColor.a != opacity)
     {
         JTHIS->_textColor.a = opacity;
-        JTHIS->_willUpdateTextColor = JTRUE;
+        JTHIS->_willUpdateTextOpacity = JTRUE;
     }
 }
 
@@ -326,6 +326,8 @@ JCVOID JDM::Base::BaseText::_setTextRectDestination(JCONST JDM::PositionSize pos
 
 JCVOID JDM::Base::BaseText::_setTextTexture()
 {
+    JTHIS->_willUpdateTextTexture = JFALSE;
+
    JTHIS->_textTexture = loadTextTexture(
         ((JTHIS->_isBold && JTHIS->_isItalic) ?     
             JTHIS->_font.ItalicBold    .c_str() : ((JTHIS->_isBold)   ? 
@@ -368,8 +370,8 @@ JCVOID JDM::Base::BaseText::_updateText(JCONST JDM::PositionSize posSize)
     JIF(JTHIS->_willUpdateTextColor)
         JTHIS->_updateTextColor();
 
-   JIF(JTHIS->_willUpdateTextOpacity)
-    JTHIS->_updateTextOpacity();
+    JIF(JTHIS->_willUpdateTextOpacity)
+        JTHIS->_updateTextOpacity();
 }
 
 JCVOID JDM::Base::BaseText::_renderText()

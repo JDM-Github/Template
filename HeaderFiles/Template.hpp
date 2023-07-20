@@ -14,13 +14,9 @@ JPUBLIC:
 JPROTECTED:
     JCVOID initAllObjects()
     {
-        JSP<Text> comp = JMS<Text>(
-            JMAP<Text::Properties, JSP<Object>> {
-            { Text::TEXT,           JMS<String> ("TEST"  )},
-            { Text::X,              JMS<Integer>(50      )},
-            { Text::Y,              JMS<Integer>(50      )},
-            { Text::TEXT_COLOR_STR, JMS<String> ("ffffff")}
-        });
+        JSP<Button> comp = JMS<Button>("TEST");
+        comp->setSizePos({0, 0, WIDTH, HEIGHT});
+        comp->setIsHoverable(true);
         Window::addComponents(comp);
     }
     JCVOID update() { }

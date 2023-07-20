@@ -1,6 +1,7 @@
 #include "JDM/Header/JDMbaseComponents/JDMbaseImage.hpp"
 #include "JDM/Header/JDMfunctions.hpp"
 #include "JDM/Header/JDMinclude.hpp"
+#include "JDM/Header/logger.hpp"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 /**
@@ -84,7 +85,7 @@ JCVOID JDM::Base::BaseImage::setImageOpacity(JCONST JUINT8 opacity)
     JIF (JTHIS->_imageColor.a != opacity)
     {
         JTHIS->_imageColor.a           = opacity;
-        JTHIS->_willUpdateImageColor   = JTRUE;
+        JTHIS->_willUpdateImageOpacity = JTRUE;
     }
 }
 

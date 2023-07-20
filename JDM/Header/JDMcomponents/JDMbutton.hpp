@@ -1,6 +1,6 @@
 #pragma once
-#ifndef JDM_COMP_IMAGE_HPP
-#define JDM_COMP_IMAGE_HPP
+#ifndef JDM_COMP_BUTTON_HPP
+#define JDM_COMP_BUTTON_HPP
 
 #include "JDM/Header/defines.hpp"
 #include "JDM/Header/JDMstructs.hpp"
@@ -32,8 +32,8 @@ JNAMESPACE JDM
                 JCDOUBLE                 yPos       = 0x00,
                 JCDOUBLE                 width      = 0x64,
                 JCDOUBLE                 height     = 0x64,
-                JCONST JDM::ColorRGBA    color      = {0x00, 0x00, 0x00, 0x00},
-                JCONST JDM::ColorRGBA    colorImage = {0xff, 0xff, 0xff, 0xff},
+                JCONST JDM::ColorRGBA    color      = {0x00, 0x00, 0x00, 0xff},
+                JCONST JDM::ColorRGBA    colorImage = {0x64, 0x64, 0x64, 0xff},
                 JCONST FourArc           arc        = {0x00, 0x00, 0x00, 0x00},
                 JCINT                    fontSize   = 0x0f,
                 JCONST JDM::Font::Halign hAlign     = JDM::Font::HCENTER,

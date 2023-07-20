@@ -1,7 +1,7 @@
 #include "JDM/JDM.hpp"
-#include "HeaderFiles/Template.hpp"
+#include "HeaderFiles/Tree.hpp"
 
-using Game = Template;
+using Game = Tree;
 class GameWindow : public JDM::Window, public Game {
 private:
 public:

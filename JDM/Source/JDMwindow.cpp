@@ -54,7 +54,7 @@ JDM::Window::~Window()
     JIF (JTHIS->_iconSurface != JNULLPTR)
         SDL_FreeSurface(JTHIS->_iconSurface);
 
-    JDM::CacheManager::clean();
+    JDM::CacheManager::cleanSurfaceCache();
     SDL_Quit();
 
     JDM::Logger(" > [ END ]: Windows Closed: JDM - SDL2 (", JTHIS->_title , ")");
@@ -170,7 +170,6 @@ JCVOID JDM::Window::_winUpdate()
         JIF (!(*comp)->getDisabled())
             (*comp)->updateComp();
 }
-
 
 JCVOID JDM::Window::_winRender()
 {

@@ -74,7 +74,7 @@ Build/lib/main.o: main.cpp JDM/JDM.hpp JDM/Header/JDMwindow.hpp \
  JDM/Header/JDMcomponents/JDMbutton.hpp \
  JDM/Header/JDMcomponents/JDMimage.hpp \
  JDM/Header/JDMcomponents/JDMtext.hpp \
- JDM/Header/JDMcomponents/JDMtextInput.hpp HeaderFiles/Template.hpp
+ JDM/Header/JDMcomponents/JDMtextInput.hpp HeaderFiles/Tree.hpp
 JDM/JDM.hpp:
 JDM/Header/JDMwindow.hpp:
 JDM/Header/JDMinclude.hpp:
@@ -165,4 +165,4 @@ JDM/Header/JDMcomponents/JDMbutton.hpp:
 JDM/Header/JDMcomponents/JDMimage.hpp:
 JDM/Header/JDMcomponents/JDMtext.hpp:
 JDM/Header/JDMcomponents/JDMtextInput.hpp:
-HeaderFiles/Template.hpp:
+HeaderFiles/Tree.hpp:

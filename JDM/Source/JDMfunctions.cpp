@@ -210,10 +210,12 @@ JNAMESPACE JDM
         SDL_Surface *originalSurface = JNULLPTR;
         JIF (CacheManager::checkIfPathInSurfaceCache(path))
         {
+            JDM::Logger("[ INFO ]: GETTING SURFACE FROM CACHE");
             originalSurface = CacheManager::getSurfaceInCache(path);
         }
         JELSE
         {
+            JDM::Logger("[ INFO ]: ADDING SURFACE TO CACHE");
             originalSurface = IMG_Load(path);
             CacheManager::addPathInSurfaceCache(path, originalSurface);
         }
@@ -323,11 +325,21 @@ JNAMESPACE JDM
 
     SDL_Texture *loadTextTexture(JCCHARP path, JCCHARP text, JCONST ColorRGBA color)
     {
-        TTF_Font    *tempFont    = TTF_OpenFont(path, 256);
+        TTF_Font *tempFont = JNULLPTR;
+        JIF (CacheManager::checkIfFontExistCache(path))
+        {
+            JDM::Logger("[ INFO ]: GETTING FONT FROM CACHE");
+            tempFont = CacheManager::getFontInCache(path);
+        }
+        JELSE
+        {
+            JDM::Logger("[ INFO ]: ADDING FONT TO CACHE");
+            tempFont = TTF_OpenFont(path, 256);
+            CacheManager::addFontCache(path, tempFont);
+        }
         SDL_Surface *tempsurface = TTF_RenderText_Blended(tempFont, text, SDL_Color{color.r, color.g, color.b});
         SDL_Texture *texture     = SDL_CreateTextureFromSurface(JDM::renderer, tempsurface);
         SDL_FreeSurface (tempsurface);
-        TTF_CloseFont   (tempFont);
         JRETURN texture;
     }
 };
