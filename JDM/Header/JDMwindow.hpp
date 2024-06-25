@@ -57,6 +57,11 @@ JNAMESPACE JDM
         JSTATIC JCVOID addStartClock                (JCONST JSP<Clock>& timer                              );
         JSTATIC JCVOID removeClock                  (JCONST JSP<Clock>& timer                              );
 
+        JSTATIC JLIST<JSP<Comp::Components>> getComponents()
+        {
+            JRETURN JDM::Window::_allComponents;
+        }
+
         JTEMPLATE<JCLASS T>
         JINLINE JSTATIC JCVOID addAnimation(JCONST JSP<Animation<T>>& anim)
         {

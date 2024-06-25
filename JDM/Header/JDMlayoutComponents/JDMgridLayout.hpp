@@ -1,6 +1,6 @@
 #pragma once
-#ifndef JDM_LAYOUT_FLOAT_HPP
-#define JDM_LAYOUT_FLOAT_HPP
+#ifndef JDM_LAYOUT_GRID_HPP
+#define JDM_LAYOUT_GRID_HPP
 
 #include "JDM/Header/defines.hpp"
 #include "JDM/Header/JDMcomponents/JDMcomponent.hpp"

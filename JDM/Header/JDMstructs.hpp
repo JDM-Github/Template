@@ -69,7 +69,6 @@ JNAMESPACE JDM
         JUINT8 r; /**< The red channel value. */
         JUINT8 g; /**< The green channel value. */
         JUINT8 b; /**< The blue channel value. */
-        JUINT8 a; /**< The alpha channel value (opacity). */
     };
 
     /**
@@ -154,14 +153,6 @@ JNAMESPACE JDM
             JTHIS->topRight    = tR;
             JTHIS->bottomLeft  = bL;
             JTHIS->bottomRight = bR;
-        }
-
-        FourArc(JCONST ColorRGB& color)
-        {
-            JTHIS->topLeft     = color.r;
-            JTHIS->topRight    = color.g;
-            JTHIS->bottomLeft  = color.b;
-            JTHIS->bottomRight = color.a;
         }
     };
 

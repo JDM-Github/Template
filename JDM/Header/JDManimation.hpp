@@ -26,8 +26,8 @@ JNAMESPACE JDM
     {
     JPUBLIC:
         JINLINE Animation(
-            JCONST T * ref        = JNULLPTR,
-            JCONST T   target     = JNULLPTR,
+            T * ref        = JNULLPTR,
+            T   target     = JNULLPTR,
             JCUINT64   duration   = AnimationSpeed::ANIMATION_NORMAL,
             JCBOOL     autoRemove = JTRUE,
             JFUNCCALL  onProgress = [](){}

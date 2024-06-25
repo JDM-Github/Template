@@ -25,6 +25,32 @@ JNAMESPACE JDM
             JCBOOL mouseDownComp    (SDL_MouseButtonEvent &mouse) JOVERRIDE;
             JCBOOL getIsHoverable   (                           ) JCONST;
 
+            JINLINE JCVOID setFunctionClicked(JCONST JFUNCCALL function)
+            {
+                JTHIS->_functionClicked = function;
+            }
+            JINLINE JCVOID setFunctionReleased(JCONST JFUNCCALL function)
+            {
+                JTHIS->_functionRelease = function;
+            }
+            JINLINE JCVOID setFunctionHold(JCONST JFUNCCALL function)
+            {
+                JTHIS->_functionHold = function;
+            }
+
+            JINLINE JCONST JFUNCCALL getFunctionClicked()
+            {
+                JRETURN JTHIS->_functionClicked;
+            }
+            JINLINE JCONST JFUNCCALL getFunctionReleased()
+            {
+                JRETURN JTHIS->_functionRelease;
+            }
+            JINLINE JCONST JFUNCCALL getFunctionHold()
+            {
+                JRETURN JTHIS->_functionHold;
+            }
+
             Button(
                 JCSTR                   &text       = JEMPTYSTRING,
                 JCSTR                   &source     = DefaultImage,
@@ -49,6 +75,10 @@ JNAMESPACE JDM
 
             JBOOL     _clicked       = JFALSE;
             JBOOL     _isHoverable   = JFALSE;
+
+            JFUNCCALL _functionClicked = []() {};
+            JFUNCCALL _functionRelease = []() {};
+            JFUNCCALL _functionHold    = []() {};
         };
     }
 }

@@ -89,6 +89,154 @@ JNAMESPACE JDM
             }
         };
 
+        JCLASS Line : JPUBLIC JDM::Comp::Components
+        {
+        JPUBLIC:
+            JINLINE Line(
+                JCDOUBLE         xPos   = 0x00,
+                JCDOUBLE         yPos   = 0x00,
+                JCDOUBLE         x1Pos  = 0x64,
+                JCDOUBLE         y2Pos  = 0x64,
+                JCONST ColorRGBA color  = {0xff, 0xff, 0xff, 0xff}
+            ) :
+                Components(xPos, yPos, x1Pos, y2Pos),
+                _rectColor(color                    )
+            { }
+
+            JINLINE JCVOID setColor(JCONST ColorRGBA color)
+            {
+                JTHIS->_rectColor = color;
+            }
+
+            JINLINE JCVOID setPos2(JCONST JDM::Position pos2)
+            {
+                JTHIS->setSize({pos2.x, pos2.y});
+            }
+
+            JINLINE JCVOID setInterpolatedColorAndFactor(JCONST ColorRGBA &interpolateColor, JDOUBLE interpolateFactor)
+            {
+                JTHIS->setInterpolatedColor (interpolateColor);
+                JTHIS->setInterpolatedFactor(interpolateFactor);
+            }
+
+            JINLINE JCVOID setInterpolatedColor(JCONST ColorRGBA &interpolateColor)
+            {
+                JTHIS->_interpolatedColor = interpolateColor;
+            }
+
+            JINLINE JCVOID setInterpolatedFactor(JCDOUBLE interpolateFactor)
+            {
+                JTHIS->_interpolatedColorFactor = interpolateFactor;
+            }
+
+            JCONSTEXPR ColorRGBA getColor() JCONST
+            {
+                JRETURN JTHIS->_rectColor;
+            }
+
+            JINLINE ColorRGBA interpolateColors()
+            {
+                Uint8 r = JTHIS->_rectColor.r + JSTATICC<Uint8>((JTHIS->_interpolatedColor.r - JTHIS->_rectColor.r) * JTHIS->_interpolatedColorFactor);
+                Uint8 g = JTHIS->_rectColor.g + JSTATICC<Uint8>((JTHIS->_interpolatedColor.g - JTHIS->_rectColor.g) * JTHIS->_interpolatedColorFactor);
+                Uint8 b = JTHIS->_rectColor.b + JSTATICC<Uint8>((JTHIS->_interpolatedColor.b - JTHIS->_rectColor.b) * JTHIS->_interpolatedColorFactor);
+                Uint8 a = JTHIS->_rectColor.a + JSTATICC<Uint8>((JTHIS->_interpolatedColor.a - JTHIS->_rectColor.a) * JTHIS->_interpolatedColorFactor);
+                return { r, g, b, a };
+            }
+
+            JINLINE JCVOID update() JOVERRIDE
+            {
+                JTHIS->_setRectangle();
+            }
+
+            JINLINE JCVOID renderComp() JOVERRIDE
+            {
+                /**
+                 * The Bresenham's line algorithm
+                 *  ->  by Jack Elton Bresenham
+                 * 
+                 * Not my algorithm.
+                */
+                ColorRGBA rgba = JTHIS->interpolateColors();
+
+                JINT x1 = JTHIS->getX();
+                JINT x2 = JTHIS->getWidth();
+                JINT y1 = JTHIS->getY();
+                JINT y2 = JTHIS->getHeight();
+                JINT thickness = JTHIS->_thickness;
+
+                JINT dx = abs(x2 - x1);
+                JINT dy = abs(y2 - y1);
+                JIF (dx == 0 && dy == 0)
+                {
+                    SDL_SetRenderDrawColor(JDM::renderer, rgba.r, rgba.g, rgba.b, rgba.a);
+                    SDL_RenderDrawPoint(JDM::renderer, x1, y1);
+                    JRETURN;
+                }
+                JINT stepX, stepY;
+                JIF (x1 < x2) stepX = 1;
+                JELSE stepX = -1;
+
+                JIF (y1 < y2) stepY = 1;
+                JELSE stepY = -1;
+            
+                JINT fraction;
+                JIF (dx > dy)
+                {
+                    fraction = dy * 2 - dx;
+                    JWHILE (x1 != x2)
+                    {
+                        JFOR (JINT i = -thickness / 2; i < thickness / 2; ++i)
+                        {
+                            SDL_SetRenderDrawColor(JDM::renderer, rgba.r, rgba.g, rgba.b, rgba.a);
+                            SDL_RenderDrawPoint(JDM::renderer, x1, y1 + i);
+                        }
+                        JIF (fraction >= 0)
+                        {
+                            y1 += stepY;
+                            fraction -= dx * 2;
+                        }
+                        x1 += stepX;
+                        fraction += dy * 2;
+                    }
+                }
+                JELSE
+                {
+                    fraction = dx * 2 - dy;
+                    JWHILE (y1 != y2)
+                    {
+                        JFOR (JINT i = -thickness / 2; i < thickness / 2; ++i)
+                        {
+                            SDL_SetRenderDrawColor(JDM::renderer, rgba.r, rgba.g, rgba.b, rgba.a);
+                            SDL_RenderDrawPoint(JDM::renderer, x1 + i, y1);
+                        }
+                        JIF (fraction >= 0)
+                        {
+                            x1 += stepX;
+                            fraction -= dy * 2;
+                        }
+                        y1 += stepY;
+                        fraction += dx * 2;
+                    }
+                }
+            }
+
+        JPRIVATE:
+            ColorRGBA _rectColor              = {0xff, 0xff, 0xff, 0xff};
+            ColorRGBA _interpolatedColor      = {0x00, 0x00, 0x00, 0x00};
+            SDL_FRect _rect                   = {0x00, 0x00, 0x00, 0x00};
+
+            JINT      _thickness              = 5;
+            JDOUBLE  _interpolatedColorFactor = 0.0;
+
+        JPRIVATE:
+            JINLINE JCVOID _setRectangle()
+            {
+                JTHIS->_rect.w = JTHIS->getWidth();
+                JTHIS->_rect.h = JTHIS->getHeight();
+                JTHIS->_rect.x = JTHIS->getX();
+                JTHIS->_rect.y = JTHIS->getY();
+            }
+        };
     // JCLASS Circle : JPUBLIC Components {
 
     // JPRIVATE:

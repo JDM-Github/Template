@@ -33,19 +33,24 @@ JNAMESPACE JDM
             }
 
         JPUBLIC:
-            JCVOID         setImageSource          (JCSTR &source              );
-            JCVOID         setImageAndOpacityColor (JCONST JDM::ColorRGBA color);
-            JCVOID         setImageColor           (JCONST JDM::ColorRGB color );
-            JCVOID         setImageOpacity         (JCONST JUINT8 opacity      );
-            JCVOID         setImageColorR          (JUINT8 rColor              );
-            JCVOID         setImageColorG          (JUINT8 gColor              );
-            JCVOID         setImageColorB          (JUINT8 bColor              );
-            JCVOID         setImageFourArc         (JCONST JDM::FourArc arc    );
-            JCVOID         setImageTwoLRArc        (JCONST JDM::TwoLRArc arcLR );
-            JCVOID         setImageTwoTBArc        (JCONST JDM::TwoTBArc arcTB );
-            JCVOID         setImageLineWidth       (JUINT8 lineWidth           );
-            JCVOID         setImageRegion          (JCONST JDM::Region region  );
-            JCVOID         setWillUpdateImageColor (JCBOOL imageUpdate         );
+            JCVOID         setImageSource            (JCSTR &source              );
+            JCVOID         setImageAndOpacityColor   (JCONST JDM::ColorRGBA color);
+            JCVOID         setImageColor             (JCONST JDM::ColorRGB color );
+            JCVOID         setImageOpacity           (JCONST JUINT8 opacity      );
+            JCVOID         setImageColorR            (JUINT8 rColor              );
+            JCVOID         setImageColorG            (JUINT8 gColor              );
+            JCVOID         setImageColorB            (JUINT8 bColor              );
+            JCVOID         setImageFourArc           (JCONST JDM::FourArc arc    );
+            JCVOID         setImageTwoLRArc          (JCONST JDM::TwoLRArc arcLR );
+            JCVOID         setImageTwoTBArc          (JCONST JDM::TwoTBArc arcTB );
+            JCVOID         setImageLineWidth         (JUINT8 lineWidth           );
+            JCVOID         setImageRegion            (JCONST JDM::Region region  );
+            JCVOID         setWillUpdateImageColor   (JCBOOL imageUpdate         );
+            JCVOID         setWillUpdateImageOpacity (JCBOOL imageUpdate         );
+
+            // JCVOID         setAnimationStep          (JINT    delay              );
+            // JCVOID         setAnimationLoop          (JINT    loop               );
+            // JCVOID         setAnimationDelay         (JDOUBLE delay              );
 
             JDM::ColorRGBA getImageAndOpacityColor () JCONST;
             JDM::ColorRGB  getImageColor           () JCONST;
@@ -55,6 +60,10 @@ JNAMESPACE JDM
             JUINT8         getImageColorB          () JCONST;
             Region         getImageRegion          () JCONST;
             RegionF        getImageDestination     () JCONST;
+
+            // JDOUBLE         getAnimationDelay      () JCONST;
+            // JINT            getAnimationLoop       () JCONST;
+            // JINT            getAnimationStep       () JCONST;
 
             JDM::FourArc   getImageFourArc         () JCONST;
             JUINT8         getImageLineWidth       () JCONST;
@@ -78,6 +87,14 @@ JNAMESPACE JDM
 
             JDM::FourArc _arc                    = {0x00, 0x00, 0x00, 0x00};
             JINT         _lineWidth              = JNONE;
+
+            JINT         _currentStep            = 0;
+            JINT         _currentLoop            = 0;
+            JDOUBLE      _currentDelay           = 0;
+
+            JINT         _animationStep          = 3;
+            JINT         _animationLoop          = 0;
+            JDOUBLE      _animationDelay         = JDM::AnimationSpeed::ANIMATION_NORMAL;
 
         JPROTECTED:
             JCVOID _setImageRectDestination (JCONST JDM::PositionSize posSize                      );

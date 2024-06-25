@@ -24,6 +24,14 @@ JNAMESPACE JDM
                 JRETURN JTHIS->_childrens;
             }
 
+            JINLINE JCVOID clearChildrens()
+            {
+                JFOR (JAUTO &children : JTHIS->_childrens)
+                {
+                    JTHIS->removeChildren(children);
+                }
+            }
+
         JPROTECTED:
             BaseLayout() {}
         
